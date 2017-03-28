@@ -10,49 +10,48 @@
 </template>
 
 <script>
-  import Spinner from 'components/Spinner.vue'
+import Spinner from 'components/Spinner.vue'
 
-  function fetchZen (store, type = 'normal') {
-    return store.dispatch('FETCH_ZEN', type)
-  }
+function fetchZen (store, type = 'normal') {
+  return store.dispatch('FETCH_ZEN', type)
+}
 
-  export default {
-    components: {Spinner},
-    name: 'zen',
-    computed: {
-      zen () {
-        return this.$store.state.zen
-      },
-      loading () {
-        return this.$store.state.loading
-      },
-      fetchText () {
-        return this.loading ? 'Fetching...' : 'Fetch Zen'
-      }
+export default {
+  components: {Spinner},
+  name: 'zen',
+  computed: {
+    zen () {
+      return this.$store.state.zen
     },
-    preFetch: fetchZen,
-    beforeMount () {
-      fetchZen(this.$store, 'first')
+    loading () {
+      return this.$store.state.loading
     },
-    methods: {
-      fetch () {
-        fetchZen(this.$store)
-      }
+    fetchText () {
+      return this.loading ? 'Fetching...' : 'Fetch Zen'
+    }
+  },
+  preFetch: fetchZen,
+  beforeMount () {
+    fetchZen(this.$store, 'first')
+  },
+  methods: {
+    fetch () {
+      fetchZen(this.$store)
     }
   }
+}
 </script>
 
 <style lang='less'>
-  .zen {
-    text-align: center;
-  }
-  .button {
-    color: #333;
-    background: #ddd;
-    border: none;
-    width: 200px;
-    height: 40px;
-    cursor: pointer;
-  }
-
+.zen {
+  text-align: center;
+}
+.button {
+  color: #333;
+  background: #ddd;
+  border: none;
+  width: 200px;
+  height: 40px;
+  cursor: pointer;
+}
 </style>
