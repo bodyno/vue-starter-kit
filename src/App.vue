@@ -6,8 +6,6 @@
         <router-link to='/' exact>Home</router-link>
         <span class='spa'>·</span>
         <router-link to='/zen'>Zen</router-link>
-        <span class='spa'>·</span>
-        <router-link to='/test'>Test</router-link>
       </nav>
     </header>
     <router-view class='view'></router-view>
