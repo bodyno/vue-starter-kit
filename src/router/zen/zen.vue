@@ -2,29 +2,29 @@
   <div class='zen'>
     <h1>Zen page</h1>
     <button class='button' @click='fetch'>{{fetchText}}</button>
-    <div v-for='item in list'>
+    <div v-for='item in zen.list'>
       <div>{{item}}</div>
     </div>
+    <spinner :show='zen.loading'></spinner>
   </div>
 </template>
 
 <script>
+
+import Spinner from 'components/Spinner.vue'
+import {mapState} from 'vuex'
 
 function fetchZen (store, type = 'normal') {
   return store.dispatch('FETCH_ZEN', type)
 }
 
 export default {
+  components: {Spinner},
   name: 'zen',
   computed: {
-    list () {
-      return this.$store.state.zen.list
-    },
-    loading () {
-      return this.$store.state.zen.loading
-    },
+    ...mapState(['zen']),
     fetchText () {
-      return this.loading ? 'Fetching...' : 'Fetch Zen'
+      return this.zen.loading ? 'Fetching...' : 'Fetch Zen'
     }
   },
   preFetch: fetchZen,
@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang='less'>
+<style lang='less' scoped>
 .zen {
   text-align: center;
 }

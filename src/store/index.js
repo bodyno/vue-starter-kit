@@ -1,19 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import zen from './zen'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  state: {
-    core: {
-      name: 'core'
-    }
+  modules: {
+    zen
   }
 })
 
 export default store
-
-export function registerModule (name, newStore) {
-  if (store._modules[name]) return
-  store.registerModule(name, newStore)
-}
