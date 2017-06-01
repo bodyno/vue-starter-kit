@@ -1,13 +1,41 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import zen from './zen'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
-  modules: {
-    zen
-  }
-})
+export function createStore () {
+  return new Vuex.Store({
+    state: {
+      zen: {
+        list: [],
+        loading: false,
+      },
+    },
 
-export default store
+    actions: {
+      FETCH_ZEN: ({commit, state: {zen}}, type) => {
+        if (zen.loading) return
+        if (type === 'first' && zen.list[0]) {
+          return Promise.resolve(zen.list[0])
+        } else {
+          commit('LOADING_ZEN', true)
+          return axios.get('https://api.github.com/zen').then(({data}) => {
+            commit('LOADING_ZEN', false)
+            commit('SET_ZEN', data)
+            return data
+          })
+        }
+      }
+    },
+
+    mutations: {
+      SET_ZEN: (state, item) => {
+        state.zen.list.push(item)
+      },
+      LOADING_ZEN: (state, loadingState) => {
+        state.zen.loading = loadingState
+      }
+    }
+  })
+}

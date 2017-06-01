@@ -1,7 +1,7 @@
 <template>
   <div id='app'>
     <header class='header'>
-      <h1>Vue Starter Kit<a class='link' href='https://bodyno.com' target='_blank'>bodyno</a></h1>
+      <h1>Vue Starter Kit<a class='link' href='http://bodyno.com' target='_blank'>bodyno</a></h1>
       <nav class='inner'>
         <router-link to='/' exact>Home</router-link>
         <span class='spa'>·</span>

@@ -14,26 +14,28 @@
 import Spinner from 'components/Spinner.vue'
 import {mapState} from 'vuex'
 
-function fetchZen (store, type = 'normal') {
-  return store.dispatch('FETCH_ZEN', type)
-}
-
 export default {
+  title () {
+    return this.zen.list[0]
+  },
   components: {Spinner},
-  name: 'zen',
   computed: {
     ...mapState(['zen']),
     fetchText () {
       return this.zen.loading ? 'Fetching...' : 'Fetch Zen'
     }
   },
-  preFetch: fetchZen,
+  asyncData ({store}) {
+    return store.dispatch('FETCH_ZEN', 'first')
+  },
   beforeMount () {
-    fetchZen(this.$store, 'first')
+    this.$store.dispatch('FETCH_ZEN', 'first').then(response => {
+      this.$setTitle(response)
+    })
   },
   methods: {
     fetch () {
-      fetchZen(this.$store)
+      this.$store.dispatch('FETCH_ZEN', 'normal')
     }
   }
 }

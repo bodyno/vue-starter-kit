@@ -10,3 +10,9 @@
   text-align: center;
 }
 </style>
+
+<script>
+export default {
+  title: 'Home'
+}
+</script>

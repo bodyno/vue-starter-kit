@@ -5,11 +5,13 @@ import Zen from './zen'
 
 Vue.use(Router)
 
-export default new Router({
-  mode: 'history',
-  scrollBehavior: () => ({ y: 0 }),
-  routes: [
-    Home,
-    Zen,
-  ]
-})
+export function createRouter () {
+  return new Router({
+    mode: 'history',
+    scrollBehavior: () => ({ y: 0 }),
+    routes: [
+      Home,
+      Zen,
+    ]
+  })
+}
