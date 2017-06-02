@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './home'
-import Zen from './zen'
+
+const home = () => import('../views/home.vue')
+const zen = () => import('../views/zen.vue')
 
 Vue.use(Router)
 
@@ -10,8 +11,8 @@ export function createRouter () {
     mode: 'history',
     scrollBehavior: () => ({ y: 0 }),
     routes: [
-      Home,
-      Zen,
+      {path: '/', component: home},
+      {path: '/zen', component: zen},
     ]
   })
 }
